@@ -301,7 +301,7 @@ elif st.session_state.page == "Prediksi":
             province_names = sorted(source_df['name'].unique())
             
             with st.form(key='prediction_form'):
-                st.subheader("Masukkan nilai-nilai berikut untuk memprediksi total emisi CO₂")
+                st.subheader("Masukkan nilai-nilai berikut untuk memprediksi total emisi CO₂!")
                 
                 col1, col2, col3 = st.columns(3)
                 with col1:
@@ -372,7 +372,7 @@ elif st.session_state.page == "Prediksi":
         if not os.path.exists(MODEL_DIR) or source_df is None:
             st.error(f"ARIMA model directory '{MODEL_DIR}' or source data not found.")
         else:
-            st.subheader("Pilih provinsi dan jumlah tahun untuk memprediksi tren emisi CO₂")
+            st.subheader("Pilih provinsi dan jumlah tahun untuk memprediksi tren emisi CO₂!")
             
             arima_province_names = sorted([
                 f.replace('arima_model_', '').replace('.pkl', '').replace('_', ' ') 
