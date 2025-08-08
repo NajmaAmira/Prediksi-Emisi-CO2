@@ -137,12 +137,12 @@ if st.session_state.page == "Beranda":
         with col2:
             st.markdown("""
             **1. Regresi:**
-            - Pendekatan ini menggunakan model **Gradient Boosting Regressor**, yang telah dilatih menggunakan seluruh dataset di seluruh provinsi.
+            - Pendekatan ini menggunakan model **Gradient Boosting Regressor** yang dilatih menggunakan seluruh dataset di seluruh provinsi.
             - Model ini mempelajari hubungan kompleks antara emisi CO₂ dan berbagai faktor sosio-ekonomi seperti GDP, populasi, tingkat urbanisasi, dan struktur industri.
             - Hal ini memungkinkan Anda untuk membuat skenario “what-if” yang detail untuk melihat bagaimana perubahan kebijakan dan ekonomi tertentu dapat memengaruhi emisi.
             """)
 
-            st.markdown("**Google Colab :** [Prediksi_Emisi_CO2_Regresi.ipynb](%s)" % regression_url)
+            st.markdown("**Google Colab :** [Prediksi_Emisi_CO₂_Regresi.ipynb](%s)" % regression_url)
 
         st.divider()
 
@@ -158,7 +158,7 @@ if st.session_state.page == "Beranda":
             - Hal ini memberikan perkiraan “dasar”, menunjukkan arah emisi suatu provinsi jika momentum historisnya terus berlanjut tanpa perubahan eksternal yang signifikan.
             """)
 
-            st.markdown("**Google Colab :** [Prediksi_Emisi_CO2_Forecasting.ipynb](%s)" % arima_url)
+            st.markdown("**Google Colab :** [Prediksi_Emisi_CO₂_Forecasting.ipynb](%s)" % arima_url)
         
         st.divider()
         st.markdown("Dengan menggunakan kedua pendekatan ini, pengguna dapat memperoleh pemahaman yang komprehensif tentang faktor-faktor mendasar yang menyebabkan emisi serta tren masa depan yang kemungkinan terjadi.")
