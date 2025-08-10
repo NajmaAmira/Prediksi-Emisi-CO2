@@ -136,7 +136,6 @@ if st.session_state.page == "Beranda":
         st.divider()
         st.header("Metode yang Digunakan")
 
-        # --- Feature 1 with Image ---
         col1, col2 = st.columns([1, 4])
         with col1:
             st.image("Regression.png")
@@ -151,7 +150,6 @@ if st.session_state.page == "Beranda":
 
         st.divider()
 
-        # --- Feature 2 with Image ---
         col1, col2 = st.columns([1, 4])
         with col1:
             st.image("forecasting.jpg", )
@@ -416,10 +414,9 @@ elif st.session_state.page == "Prediksi":
             else:
                 st.error(f"Tidak dapat memuat model prediksi untuk {fc_province}.")
 
-# Penambahan Halaman Baru "Tentang Penyusun"
 elif st.session_state.page == "Penyusun":
     st.header("Tim Penyusun")
-    st.write("Aplikasi ini disusun sebagai bagian dari proyek analisis data oleh mahasiswa Universitas Dian Nuswantoro.")
+    st.write("Aplikasi ini disusun sebagai bagian dari uji sertifikasi oleh Lembaga Sertifikasi Profesi (LSP) Universitas Dian Nuswantoro.")
     st.divider()
     
     col1, col2 = st.columns(2, gap="large")
