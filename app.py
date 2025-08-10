@@ -52,8 +52,7 @@ def load_model(file_path):
     except Exception as e:
         st.error(f"Error loading model file {file_path}: {e}")
         return None
-
-# --- Main Application UI ---
+    
 st.image("Header_Streamlit.png")
 
 # --- Load Data and Models ---
@@ -99,6 +98,8 @@ if 'page' not in st.session_state:
 
 home_btn_type = "primary" if st.session_state.page == 'Beranda' else "secondary"
 est_btn_type = "primary" if st.session_state.page == 'Prediksi' else "secondary"
+# Penambahan variabel untuk tombol baru
+creator_btn_type = "primary" if st.session_state.page == 'Penyusun' else "secondary"
 
 if st.sidebar.button("Beranda", use_container_width=True, type=home_btn_type):
     st.session_state.page = 'Beranda'
@@ -106,6 +107,11 @@ if st.sidebar.button("Beranda", use_container_width=True, type=home_btn_type):
 if st.sidebar.button("Prediksi", use_container_width=True, type=est_btn_type):
     st.session_state.page = 'Prediksi'
     st.rerun()
+# Penambahan tombol baru di sidebar
+if st.sidebar.button("Tentang Penyusun", use_container_width=True, type=creator_btn_type):
+    st.session_state.page = 'Penyusun'
+    st.rerun()
+
 
 # ==========================================================================
 # HOME PAGE
@@ -116,12 +122,12 @@ if st.session_state.page == "Beranda":
     with home_tab1:
         st.header("Latar Belakang")
         st.write("""
-            Di tengah urgensi krisis iklim global, emisi karbon dioksida (CO₂) menjadi perhatian utama sebagai salah satu penyumbang terbesar.
-            Untuk merumuskan solusi yang efektif, pemahaman terhadap faktor-faktor yang mendorong emisi perlu dikaji secara mendalam, tidak hanya di tingkat global, tetapi juga pada skala regional di mana kebijakan dapat diterapkan secara langsung.
-            
-            Analisis ini secara khusus difokuskan pada provinsi-provinsi di China dengan tujuan memahami bagaimana berbagai faktor seperti pertumbuhan ekonomi, dinamika kependudukan, dan perubahan struktur industri secara bersama-sama membentuk jejak karbon suatu wilayah. Pemahaman menyeluruh terhadap keterkaitan kompleks antara faktor-faktor tersebut menjadi langkah penting dalam merancang strategi mitigasi yang lebih tepat sasaran sesuai dengan kondisi khas di masing-masing daerah.
-            Pemahaman mendalam terhadap hubungan kompleks ini merupakan langkah krusial untuk merancang strategi mitigasi yang lebih tajam dengan kondisi unik setiap daerah di China.
-        """)
+                 Di tengah urgensi krisis iklim global, emisi karbon dioksida (CO₂) menjadi perhatian utama sebagai salah satu penyumbang terbesar.
+                 Untuk merumuskan solusi yang efektif, pemahaman terhadap faktor-faktor yang mendorong emisi perlu dikaji secara mendalam, tidak hanya di tingkat global, tetapi juga pada skala regional di mana kebijakan dapat diterapkan secara langsung.
+                 
+                 Analisis ini secara khusus difokuskan pada provinsi-provinsi di China dengan tujuan memahami bagaimana berbagai faktor seperti pertumbuhan ekonomi, dinamika kependudukan, dan perubahan struktur industri secara bersama-sama membentuk jejak karbon suatu wilayah. Pemahaman menyeluruh terhadap keterkaitan kompleks antara faktor-faktor tersebut menjadi langkah penting dalam merancang strategi mitigasi yang lebih tepat sasaran sesuai dengan kondisi khas di masing-masing daerah.
+                 Pemahaman mendalam terhadap hubungan kompleks ini merupakan langkah krusial untuk merancang strategi mitigasi yang lebih tajam dengan kondisi unik setiap daerah di China.
+                 """)
         st.header("Deskripsi Proyek")
         st.write("""
         Aplikasi ini dirancang untuk menganalisis dan memprediksi emisi CO₂ di berbagai provinsi di China menggunakan dua pendekatan utama.
@@ -141,7 +147,6 @@ if st.session_state.page == "Beranda":
             - Model ini mempelajari hubungan kompleks antara emisi CO₂ dan berbagai faktor sosio-ekonomi seperti GDP, populasi, tingkat urbanisasi, dan struktur industri.
             - Hal ini memungkinkan Anda untuk membuat skenario “what-if” yang detail untuk melihat bagaimana perubahan kebijakan dan ekonomi tertentu dapat memengaruhi emisi.
             """)
-
             st.markdown("**Google Colab :** [Prediksi_Emisi_CO₂_Regresi.ipynb](%s)" % regression_url)
 
         st.divider()
@@ -157,11 +162,10 @@ if st.session_state.page == "Beranda":
             - Model ARIMA dilatih untuk setiap provinsi secara individual, dengan fokus pada tren emisi historisnya.
             - Hal ini memberikan perkiraan “dasar”, menunjukkan arah emisi suatu provinsi jika momentum historisnya terus berlanjut tanpa perubahan eksternal yang signifikan.
             """)
-
             st.markdown("**Google Colab :** [Prediksi_Emisi_CO₂_Forecasting.ipynb](%s)" % arima_url)
         
         st.divider()
-        st.markdown("Dengan menggunakan kedua pendekatan ini, pengguna dapat memperoleh pemahaman yang komprehensif tentang faktor-faktor mendasar yang menyebabkan emisi serta tren masa depan yang kemungkinan terjadi.")
+        st.markdown("Dengan menggunakan kedua pendekatan ini, pengguna dapat memperoleh gambaran prediksi emisi beserta pengaruh nilai masing-masing faktor terhadap hasil prediksi tersebut, sekaligus memahami tren masa depan yang kemungkinan terjadi.")
 
     with home_tab2:
         st.header("Gambaran Umum Dataset")
@@ -173,11 +177,11 @@ if st.session_state.page == "Beranda":
                 st.markdown("""
                 ### Sumber Dataset
                 - **Sumber**: [Data for: Spatial Characteristics and Future Forecasting of Carbon Dioxide Emissions in China: A Provincial-Level Analysis](https://data.mendeley.com/datasets/rp3f7mdjxz/1)
-                - **Tanggal Publikasi**: 30 Jul 2024
+                - **Tanggal Publikasi**: 30 Juli 2024
                 - **DOI**: [10.17632/rp3f7mdjxz.1](https://doi.org/10.17632/rp3f7mdjxz.1)
                 
                 ### Deskripsi Umum
-                Dataset berisi data socio-ekonomi dan emisi karbon dioksida (CO₂) dari 31 provinsi di China selama periode 21 tahun (1999 hingga 2019). Secara keseluruhan, terdapat 651 baris data, yang merupakan hasil perkalian antara 31 provinsi dengan 21 tahun pengamatan.
+                Dataset berisi data sosio-ekonomi dan emisi karbon dioksida (CO₂) dari 31 provinsi di China selama periode 21 tahun (1999 hingga 2019). Secara keseluruhan, terdapat 651 baris data yang merupakan hasil perkalian antara 31 provinsi dengan 21 tahun pengamatan.
 
                 ### Deskripsi Kolom
                 - **`Name`**: Nama provinsi di China.
@@ -193,7 +197,7 @@ if st.session_state.page == "Beranda":
                 """)
 
             with st.expander("1. Pratinjau Dataset Mentah", expanded=False):
-                st.markdown("Berikut adalah dataset asli yang belum diolah, sebagaimana dimuat dari sumber.")
+                st.markdown("Berikut adalah dataset asli yang belum diolah, sebagaimana dimuat dalam sumber.")
                 st.dataframe(raw_df.head(10))
 
             with st.expander("2. Langkah Pra-pemrosesan", expanded=False):
@@ -212,7 +216,7 @@ if st.session_state.page == "Beranda":
                 #### c. Konversi Tipe Data
                 Kolom numerik dimuat secara salah sebagai teks (`object`) karena menggunakan koma sebagai pemisah desimal. Setiap kolom ini dikonversi:
                 1.  Koma (`,`) diganti dengan titik (`.`).
-                2.  String hasil konversi dikonversi menjadi bilangan floating-point (`float`).
+                2.  String hasil konversi dikonversi menjadi bilangan numerik (`float`).
                 
                 #### d. Penanganan Extreme Outliers
                 Boxplots menunjukkan satu extrem outlier pada `proportion_of_primary_industry_percent` dan satu pada `proportion_of_secondary_industry_percent`. Outlier-outlier ini dapat memengaruhi akurasi model.
@@ -266,13 +270,6 @@ if st.session_state.page == "Beranda":
                     tickangle=45
                 )
 
-                # fig_all_provinces.update_layout(legend=dict(
-                #     orientation="h",
-                #     yanchor="bottom",
-                #     y=-0.4, 
-                #     xanchor="right",
-                #     x=1
-                # ))
                 st.plotly_chart(fig_all_provinces, use_container_width=True)
 
                 st.subheader("Distribusi Fitur")
@@ -314,7 +311,7 @@ elif st.session_state.page == "Prediksi":
                     primary_ind = st.number_input("Proportion of Primary Industry (%)", min_value=0.0, max_value=100.0, format="%.1f")
                 with col3:
                     secondary_ind = st.number_input("Proportion of Secondary Industry (%)", min_value=0.0, max_value=100.0, format="%.1f")
-                    tertiary_ind = st.number_input("Proportion of Tertiary Industry (%)", min_value=0.0, max_value=100.0, format="%.1f")
+                    tertiary_ind = st.number_input("Proportion of the Tertiary Industry (%)", min_value=0.0, max_value=100.0, format="%.1f")
                     coal_prop = st.number_input("Coal Proportion (%)", min_value=0.0, max_value=100.0, format="%.1f")
                 
                 submit_button = st.form_submit_button(label='Prediksi Emisi')
@@ -333,11 +330,10 @@ elif st.session_state.page == "Prediksi":
                         'proportion_of_the_tertiary_industry_percent': [tertiary_ind], 
                         'coal_proportion_percent': [coal_prop]
                     }
-                    # Rename the columns in the prediction input to match the model's training columns
                     input_data_df = pd.DataFrame(input_data_dict)
                     
                     prediction = regression_model.predict(input_data_df)[0]
-                    st.metric(label=f"Prediksi Emisi CO₂ Provinsi {province}", value=f"{prediction:,.2f} juta ton", width="content")
+                    st.metric(label=f"Prediksi Emisi CO₂ Provinsi {province}", value=f"{prediction:,.2f} juta ton")
                 
                 with res_col2:
                     st.subheader("Deskripsi")
@@ -419,3 +415,25 @@ elif st.session_state.page == "Prediksi":
                 }).style.format("{:,.2f}"))
             else:
                 st.error(f"Tidak dapat memuat model prediksi untuk {fc_province}.")
+
+# Penambahan Halaman Baru "Tentang Penyusun"
+elif st.session_state.page == "Penyusun":
+    st.header("Tim Penyusun")
+    st.write("Aplikasi ini disusun sebagai bagian dari proyek analisis data oleh mahasiswa Universitas Dian Nuswantoro.")
+    st.divider()
+    
+    col1, col2 = st.columns(2, gap="large")
+
+    with col1:
+        st.image("dzawil.jpg", width=200)
+        st.subheader("Dzawil Uqul")
+        st.write("**NIM:** A11.2022.14141")
+        st.write("**Institusi:** Universitas Dian Nuswantoro")
+        st.link_button("Profil LinkedIn", "https://www.linkedin.com/in/dzawil-uqul-1766ab13b")
+
+    with col2:
+        st.image("najma.jpg", width=200)
+        st.subheader("Najma Amira Mumtaz")
+        st.write("**NIM:** A11.2022.14708")
+        st.write("**Institusi:** Universitas Dian Nuswantoro")
+        st.link_button("Profil LinkedIn", "https://www.linkedin.com/in/najma-amira-mumtaz-193531247")
